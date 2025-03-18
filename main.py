@@ -1,28 +1,14 @@
-email_client_config = {
-}
+from lib.web_interactor import WebInteractor
+from lib.email_client import EmailClient
+from lib.llm_agent import LLMAgent
 
-interactor_config = {
-    "budget": [300, 600],
-    "commute_endpoint": "ETH HG",
-    "commute_limit_minutes": 30
-}
+interactor = WebInteractor()
+email_client = EmailClient()
+llm_agent = LLMAgent()
 
-llm_config = {
-    "path_to_description": "string",
-    "path_to_credentials": "string",
-}
+response = llm_agent.respond("Tell me a quick joke.")
 
-# interactor = WebInteractor(interactor_config)
-# llm_agent = LLMAgent(llm_config)
-# email_client = EmailClient(email_client_config)
-
-# interactor.enter()
-
-# interactor.filter()
-
-# interactor.sort()
-
-# interactor.select(5) 
+print(response)
 
 # for offer in interactor.select(5): # select top 5
     # context = interactor.scrape(offer)

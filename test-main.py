@@ -56,13 +56,16 @@ try:
         if "https://wohnen.ethz.ch/index.php?act=detoffer&" in url:
             print(url)
             driver.get(url)
+            
+            
             time.sleep(1000)  # Adjust the sleep time as needed
             
             # scrape adresses
-            # extract text
-            # return this
+            # extract all releavant information
+            # extract location + query api of Google
+                # filter on that
+            # return information content
             # call LLM
-            # create an email
             
             exit()
     
