@@ -2,15 +2,13 @@ from lib.web_interactor import WebInteractor
 from lib.email_client import EmailClient
 from lib.llm_agent import LLMAgent
 
-interactor = WebInteractor()
+web_interactor = WebInteractor()
 email_client = EmailClient()
 llm_agent = LLMAgent()
 
-response = llm_agent.respond("Tell me a quick joke.")
-
-print(response)
-
-# for offer in interactor.select(5): # select top 5
-    # context = interactor.scrape(offer)
-    # message, adress = llm_agent.prepare(context)
-    # email_client.contact(adress, message)
+web_interactor.load()
+web_interactor.enter()
+web_interactor.search()
+urls = web_interactor.gather_results()
+web_interactor.visit_and_gather(urls[0])
+web_interactor.close()
