@@ -1,0 +1,1 @@
+1. Fill in your credentials to secret/site_credentials.json
