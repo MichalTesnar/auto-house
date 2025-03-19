@@ -3,6 +3,10 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 import time
 import json
+from bs4 import BeautifulSoup
+
+
+TIME_DELAY = 0.5
 
 class WebInteractor():
     
@@ -25,7 +29,7 @@ class WebInteractor():
     
     def load(self):
         self.driver.get(self.base_url)
-        time.sleep(1)
+        time.sleep(TIME_DELAY)
         self.state = "LOADED"
     
     def enter(self):
@@ -35,7 +39,7 @@ class WebInteractor():
         password_field = self.driver.find_element(By.NAME, "Passwort")
         password_field.send_keys(self.password)
         password_field.send_keys(Keys.RETURN)
-        time.sleep(1)
+        time.sleep(TIME_DELAY)
         self.state = "ENTERED"
     
     def search(self):
@@ -44,7 +48,7 @@ class WebInteractor():
         place_field = self.driver.find_element(By.NAME, "Ort")
         place_field.send_keys(self.place)
         place_field.send_keys(Keys.RETURN)
-        time.sleep(1)
+        time.sleep(TIME_DELAY)
         self.state = "SEARCHED"
         
     def gather_results(self):
@@ -62,18 +66,37 @@ class WebInteractor():
     
     def visit_and_gather(self, url: str):
         self.driver.get(url)
+        
+        time.sleep(TIME_DELAY)
+        
+        section = self.driver.find_element(By.ID, 'contentContainer')
+        
+        html_content = section.get_attribute('innerHTML')
+
+        soup = BeautifulSoup(html_content, 'html.parser')
+
+        # Convert the parsed HTML to an XML tree
+        xml_tree = soup.prettify()
+        
+        adresse_row = soup.find('td', class_='fieldlabel', text='Adresse').find_parent('tr')
+        
+        # if adresse_row:
+        #     adresse_cell = adresse_row.find('td', class_='datacell')
+        #     if adresse_cell:
+        #         address = adresse_cell.get_text(strip=True, separator=' ')
+        #         print("Address:", address)
+        #     else:
+        #         print("Address cell not found")
+        # else:
+            # print("Adresse row not found")
+
+        
+        # # print(html_content)
+        return html_content
+
                 
                 
-        time.sleep(1)
-        
-        # scrape adresses
-        # extract all releavant information
-        # extract location + query api of Google
-            # filter on that
-        # return information content
-        # call LLM
-        
-        exit()
+        # time.sleep(100000)
         
     def close(self):
         self.driver.quit()
