@@ -10,3 +10,5 @@ You password is app specific, read more [here](https://support.google.com/mail/a
 quickstart https://ai.google.dev/gemini-api/docs/quickstart?hl=es-419
 
 limits https://ai.google.dev/gemini-api/docs/rate-limits?hl=es-419
+
+4. setup Google Matrix API https://developers.google.com/maps/documentation/distance-matrix/overview

@@ -10,16 +10,18 @@ web_interactor.load()
 web_interactor.enter()
 web_interactor.search()
 urls = web_interactor.gather_results()
-html_content = web_interactor.visit_and_gather(urls[0])
+for url in urls:
+    html_content = web_interactor.visit_and_gather(url)
 
-llm_agent.add_to_message(html_content)
+    llm_agent.add_to_message(html_content)
 
-response = llm_agent.process_conversation()
+    response = llm_agent.process_conversation()
 
-email_client.gmail_send_message(
-    "tesnarmm@gmail.com",
-    "Interest in Room Posted on Online",
-    response
-)
+    email_client.gmail_send_message(
+        "tesnarmm@gmail.com",
+        "Interest in Room Posted on Online",
+        response
+    )
+    break
 
 web_interactor.close()

@@ -1,6 +1,6 @@
 # Urgent
 - [ ] Make separte subject, and saluation for the email by the LLM
-- [ ] Load description from a file and make it actually good.
+- [x] Load description from a file and make it actually good.
 - [ ] Extract email and phone number from the webpage
 - [ ] Implement tracking of what you responded to so not to respond twice
 - [ ] Add plugin for sending messages on WhatsApp
