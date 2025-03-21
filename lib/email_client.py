@@ -19,6 +19,7 @@ class EmailClient():
         email_message["To"] = recipient
         email_message["From"] = self.login
         email_message["Subject"] = subject
+        email_message["Bcc"] = self.login # add myself to be informed
 
         try:
             with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:

@@ -1,4 +1,6 @@
 secret/*
 logs/*
+out/wohnen.ethz.ch/*
+out/app.log
 __pycache__
 TODO.md
