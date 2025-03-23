@@ -11,7 +11,7 @@ class WohnenETHZ():
         self.web_interactor = WohnenETHZWebInteractor()
         self.email_client = EmailClient()
         self.llm_agent = LLMAgent()
-        self.file_saver = FileSaver()
+        self.file_saver = FileSaver("wohnen.ethz.ch")
         
         self.urls = []
         

@@ -13,7 +13,7 @@ SILENT = True # use driver.get_screenshot_as_file("capture.png") to debug
 class WohnenETHZWebInteractor():
     
     def __init__(self):
-        with open('secret/site_credentials.json') as f:
+        with open('secret/wohnen_ethz_credentials.json') as f:
             data = json.load(f)
             self.login = data["login"]
             self.password = data["password"]
@@ -23,8 +23,8 @@ class WohnenETHZWebInteractor():
             data = json.load(f)
             self.place = data["place"]
             self.max_rent = data["budget_upper_bound"]
-            self.commute_endpoint = data["commute_endpoint"]
-            self.commute_limit_minutes = data["commute_limit_minutes"]
+            # self.commute_endpoint = data["commute_endpoint"]
+            # self.commute_limit_minutes = data["commute_limit_minutes"]
     
         if SILENT:    
             chrome_options = Options()
