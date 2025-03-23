@@ -2,4 +2,4 @@
 
 commit:
 	git add .
-	git commit -m "Auto commit"
+	git commit -m "${m}"
