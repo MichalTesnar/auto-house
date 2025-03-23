@@ -10,7 +10,7 @@ import re
 TIME_DELAY_ON_LOAD = 0.5
 SILENT = True # use driver.get_screenshot_as_file("capture.png") to debug
 
-class WebInteractor():
+class WohnenETHZWebInteractor():
     
     def __init__(self):
         with open('secret/site_credentials.json') as f:

@@ -1,7 +1,7 @@
 import smtplib
 import json
 from email.message import EmailMessage
-from lib.logger import logger
+from src.lib.logger import logger
 
 class EmailClient():
     
