@@ -4,6 +4,16 @@ Do you like to spend time looking for housing? No, neither do I!
 
 Well, what about getting your own housing agent! An LLM can be that for you, it will crawl the web and use your personal information to apply for housing for you!
 
+# How it works?
+
+You provide your information and credentials to the agent. It automatically opens the websites, searches the offers and based on the offer compiles and sends a personalized response to the listing!
+
+# Principles of usage
+
+Please do not overuse this! By default the framework saves the sent emails/messages and does not respond to the same listing twice. Please do not modify it to send emails repeatedly.
+
+Also, the sites are not protected against bots. Please use this moderately so that they do not protect the websites.
+
 # Setup 
 
 ## Seting up the project

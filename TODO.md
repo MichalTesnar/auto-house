@@ -3,8 +3,6 @@
 # Todo
 - [ ] Make it do poem
 - [ ] Make it get approval from the user
-
-- [ ] Integrate WG Zimmer
 - [ ] Parse the HTML better for the LLM for WohnenETHZ
 - [ ] Add Image to Email As attachment
 
@@ -16,6 +14,8 @@
 - [ ] Fix tests so that they can be run from main directory
 
 # Done
+- [x] Add principles to readme
+- [x] Integrate WG Zimmer
 - [x] Do double step agent to game the message
 - [x] Load description from a file and make it actually good.
 - [x] Make separate subject for the email by the LLM
