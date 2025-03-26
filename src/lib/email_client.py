@@ -5,25 +5,22 @@ from src.lib.logger import logger
 
 class EmailClient():
     
-    def __init__(self):
-        with open('secret/gmail_credentials.json') as f:
-            data = json.load(f)
-            self.login = data["login"]
-            self.password = data["password"]
-
+    def __init__(self, profile):
+        self.profile = profile
+        
     def gmail_send_message(self, recipient: str, subject: str, content: str):
         """Send an email using SMTP with Gmail."""
         
         email_message = EmailMessage()
         email_message.set_content(content)
         email_message["To"] = recipient
-        email_message["From"] = self.login
+        email_message["From"] = self.profile.login
         email_message["Subject"] = subject
-        email_message["Bcc"] = self.login # add myself to be informed
+        email_message["Bcc"] = self.profile.login # add myself to be informed
 
         try:
             with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
-                server.login(self.login, self.password)
+                server.login(self.profile.login, self.profile.password)
                 server.send_message(email_message)
         except Exception as error:
                 logger.error(f"Error occurred while sending an email: {error}")

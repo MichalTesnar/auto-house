@@ -1,7 +1,8 @@
 secret/*
+!secret/example/ # keep the example
+
 logs/*
-out/wohnen.ethz.ch/*
-out/wgzimmer.ch/*
 out/app.log
 __pycache__
 TODO.md
+venv/

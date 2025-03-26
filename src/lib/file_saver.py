@@ -4,8 +4,8 @@ import json
 
 
 class FileSaver():
-    def __init__(self, name: str):
-        self.directory = f"out/{name}"
+    def __init__(self, name: str, profile):
+        self.directory = f"secret/{profile.name}/data/{name}"
         self.available_files = [f for f in listdir(self.directory) if isfile(join(self.directory, f))]
         
     def has_been_contacted(self, name: str) -> bool:

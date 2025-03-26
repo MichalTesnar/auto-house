@@ -7,11 +7,11 @@ from src.lib.logger import logger
 DEBUG = 0
 
 class WGZimmer():
-    def __init__(self):
-        self.web_interactor = WGZimmerWebInteractor()
-        self.email_client = EmailClient()
-        self.llm_agent = LLMAgent()
-        self.file_saver = FileSaver("wgzimmer.ch")
+    def __init__(self, profile):
+        self.web_interactor = WGZimmerWebInteractor(profile)
+        self.email_client = EmailClient(profile)
+        self.llm_agent = LLMAgent(profile)
+        self.file_saver = FileSaver("wgzimmer.ch", profile)
         
         self.urls = []
         

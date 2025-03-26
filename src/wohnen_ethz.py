@@ -4,14 +4,14 @@ from src.lib.llm_agent import LLMAgent
 from src.lib.file_saver import FileSaver
 from src.lib.logger import logger
 
-DEBUG = 1
+DEBUG = 0
 
 class WohnenETHZ():
-    def __init__(self):
-        self.web_interactor = WohnenETHZWebInteractor()
-        self.email_client = EmailClient()
-        self.llm_agent = LLMAgent()
-        self.file_saver = FileSaver("wohnen.ethz.ch")
+    def __init__(self, profile):
+        self.web_interactor = WohnenETHZWebInteractor(profile)
+        self.email_client = EmailClient(profile)
+        self.llm_agent = LLMAgent(profile)
+        self.file_saver = FileSaver("wohnen.ethz.ch", profile)
         
         self.urls = []
         

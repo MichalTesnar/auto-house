@@ -1,6 +1,9 @@
 # Doing
 
 # Todo
+- [ ] Make it do poem
+- [ ] Make it get approval from the user
+
 - [ ] Integrate WG Zimmer
 - [ ] Parse the HTML better for the LLM for WohnenETHZ
 - [ ] Add Image to Email As attachment

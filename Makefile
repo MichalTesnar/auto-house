@@ -1,5 +1,4 @@
-.PHONY: commit
+.PHONY: me-have-a-house
 
-commit:
-	git add .
-	git commit -m "Autocommit"
+me-have-a-house:
+	python main.py

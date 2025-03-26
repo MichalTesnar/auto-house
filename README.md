@@ -1,14 +1,34 @@
-1. Fill in your credentials to secret/site_credentials.json
+# Welcome! 🚗🏠
 
-2. For email authentification fill in credentials in secret/gmail_credentials.json
+Do you like to spend time looking for housing? No, neither do I!
 
-You password is app specific, read more [here](https://support.google.com/mail/answer/185833?hl=en)
+Well, what about getting your own housing agent! An LLM can be that for you, it will crawl the web and use your personal information to apply for housing for you!
 
-3. get your API key [here](https://aistudio.google.com/apikey)
+# Setup 
 
+## Seting up the project
 
-quickstart https://ai.google.dev/gemini-api/docs/quickstart?hl=es-419
+1. Install Python 3.10
+2. `python -m venv venv`
+3. `source venv/bin/activate`
+4. `pip install requirements.txt`
 
-limits https://ai.google.dev/gemini-api/docs/rate-limits?hl=es-419
+## Setting up yourself
 
-4. setup Google Matrix API https://developers.google.com/maps/documentation/distance-matrix/overview
+1. Create a folder in secret with your name.  Use this same string in `main.py` to initiate your `PersonalProfile`. You can copy the `example` folder, as you will need to fill in all the files there.
+
+2. For email authentification fill in credentials in `gmail_credentials.json`. If you are using Gmail, then your password is app specific, not your normal login. Read more [here](https://support.google.com/mail/answer/185833?hl=en).
+
+3. To use Gemini get your API key [here](https://aistudio.google.com/apikey). Read more about the limits limits [here](https://ai.google.dev/gemini-api/docs/rate-limits?hl=es-419).
+
+4. Fill in your wohnen.ethz.ch credentials to `site_credentials.json`
+
+5. Fill in `living_preference.json` and `my_description.json` up to your liking.
+
+## Ready to go!
+
+Now you can run `make me-have-a-house` or just `python main.py` (but I think the first one is more funny).
+
+# Development
+
+Please open an issue if anything comes up, or make a pull request if you want to add a feature. Refer to [TO-DO List](TODO.md) for planned features.

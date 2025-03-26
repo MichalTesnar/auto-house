@@ -8,23 +8,13 @@ from selenium.webdriver.chrome.options import Options
 import re
 
 TIME_DELAY_ON_LOAD = 2
-SILENT = False # use driver.get_screenshot_as_file("capture.png") to debug
+SILENT = False
 
 class WGZimmerWebInteractor():
     
-    def __init__(self):
+    def __init__(self, profile):
         self.base_url = "https://www.wgzimmer.ch/wgzimmer/search/mate.html"
-        
-        with open('secret/my_description.json') as f:
-            data = json.load(f)
-            self.user_name = data["Name"]
-            self.user_phone_number = data["Phone_number"]
-            self.user_email = data["Email"]
-            
-        with open('secret/living_preferences.json') as f:
-            data = json.load(f)
-            self.place = data["place_wg_zimmer"]
-            self.max_rent = int((data["budget_upper_bound"] + 49) // 50 * 50) # round up by 50s for the selector
+        self.profile = profile
     
         if SILENT:    
             chrome_options = Options()
@@ -58,14 +48,14 @@ class WGZimmerWebInteractor():
         # Select maximum price
         price_max_dropdown = self.driver.find_element(By.NAME, "priceMax")
         for option in price_max_dropdown.find_elements(By.TAG_NAME, "option"):
-            if option.get_attribute("value") == str(self.max_rent):
+            if option.get_attribute("value") == str(self.profile.max_rent_wg_zimmer):
                 option.click()
                 break
 
         # Select region
         region_dropdown = self.driver.find_element(By.NAME, "wgState")
         for option in region_dropdown.find_elements(By.TAG_NAME, "option"):
-            if option.get_attribute("value") == self.place:
+            if option.get_attribute("value") == self.profile.place_wg_zimmer:
                 option.click()
                 break
 
@@ -132,13 +122,13 @@ class WGZimmerWebInteractor():
         time.sleep(TIME_DELAY_ON_LOAD)
         
         user_name_field = self.driver.find_element(By.ID, "senderName")
-        user_name_field.send_keys(self.user_name)
+        user_name_field.send_keys(self.profile.user_name)
         
         email_field = self.driver.find_element(By.ID, "senderEmail")
-        email_field.send_keys(self.user_email)
+        email_field.send_keys(self.profile.user_email)
         
         phone_field = self.driver.find_element(By.ID, "senderPhone")
-        phone_field.send_keys(self.user_phone_number)
+        phone_field.send_keys(self.profile.user_phone_number)
         
         text_field = self.driver.find_element(By.ID, "senderText")
         text_field.send_keys(message)

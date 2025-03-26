@@ -8,24 +8,14 @@ from selenium.webdriver.chrome.options import Options
 import re
 
 TIME_DELAY_ON_LOAD = 0.5
-SILENT = True # use driver.get_screenshot_as_file("capture.png") to debug
+SILENT = False # use driver.get_screenshot_as_file("capture.png") to debug
 
 class WohnenETHZWebInteractor():
     
-    def __init__(self):
-        with open('secret/wohnen_ethz_credentials.json') as f:
-            data = json.load(f)
-            self.login = data["login"]
-            self.password = data["password"]
-            self.base_url = data["base_url"]
-            
-        with open('secret/living_preferences.json') as f:
-            data = json.load(f)
-            self.place = data["place"]
-            self.max_rent = data["budget_upper_bound"]
-            # self.commute_endpoint = data["commute_endpoint"]
-            # self.commute_limit_minutes = data["commute_limit_minutes"]
-    
+    def __init__(self, profile):
+        self.base_url = "https://wohnen.ethz.ch/index.php?act=searchoffer"
+        self.profile = profile
+
         if SILENT:    
             chrome_options = Options()
             chrome_options.add_argument("--headless")
@@ -44,18 +34,18 @@ class WohnenETHZWebInteractor():
     def enter(self):
         # @ TODO: create a check that it has worked based on the HTML
         username_field = self.driver.find_element(By.NAME, "User")
-        username_field.send_keys(self.login)
+        username_field.send_keys(self.profile.login)
         password_field = self.driver.find_element(By.NAME, "Passwort")
-        password_field.send_keys(self.password)
+        password_field.send_keys(self.profile.password)
         password_field.send_keys(Keys.RETURN)
         time.sleep(TIME_DELAY_ON_LOAD)
         self.state = "ENTERED"
     
     def search(self):
         rent_field = self.driver.find_element(By.NAME, "Miete") 
-        rent_field.send_keys(self.max_rent)
+        rent_field.send_keys(self.profile.max_rent)
         place_field = self.driver.find_element(By.NAME, "Ort")
-        place_field.send_keys(self.place)
+        place_field.send_keys(self.profile.place)
         place_field.send_keys(Keys.RETURN)
         time.sleep(TIME_DELAY_ON_LOAD)
         self.state = "SEARCHED"
@@ -101,6 +91,9 @@ class WohnenETHZWebInteractor():
             
         return pid, email, html_content
         
+         # self.commute_endpoint = data["commute_endpoint"]
+            # self.commute_limit_minutes = data["commute_limit_minutes"]
+        
         # soup = BeautifulSoup(html_content, 'html.parser')
 
         # Convert the parsed HTML to an XML tree
@@ -117,6 +110,8 @@ class WohnenETHZWebInteractor():
         #         print("Address cell not found")
         # else:
             # print("Adresse row not found")
+            
+        #https://developers.google.com/maps/documentation/distance-matrix/overview
 
     def close(self):
         self.driver.quit()
