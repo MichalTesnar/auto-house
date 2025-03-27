@@ -1,6 +1,5 @@
 secret/*
-!secret/example/ # keep the example
-
+!secret/example/
 logs/*
 out/app.log
 __pycache__
