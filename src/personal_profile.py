@@ -31,8 +31,8 @@ class PersonalProfile():
             data = json.load(f)
             self.api_key = data["KEY"]
             
-        with open(f'secret/{name}/wohnen_ethz_credentials.json') as f:
+        with open(f'secret/{name}/site_credentials.json') as f:
             data = json.load(f)
-            self.login = data["login"]
-            self.password = data["password"]
+            self.wohnen_ethz_login = data["wohnen_ethz_login"]
+            self.wohnen_ethz_password = data["wohnen_ethz_password"]
             

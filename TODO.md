@@ -3,11 +3,12 @@
 # Todo
 - [ ] Get a scout to look at pages and get updates, pass that to a server
 - [ ] Implement Flatfox
-- [ ] Add woko.ch https://woko.ch/en/zimmer-in-zuerich
+- [ ] Add woko.ch 
 - [ ] Make it do poem, make it creative
 - [ ] Make it get approval from the user
 - [ ] Parse the HTML better for the LLM for WohnenETHZ
 - [ ] Add Image to Email As attachment
+- [ ] Use a makefile to refresh example folder by copying yours!
 
 # Not Urgent
 - [ ] Test in WebInteractor that you have reached the give step for each function (using HTML headers?)
