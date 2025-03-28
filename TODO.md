@@ -1,11 +1,13 @@
 # Doing
 
 # Todo
-- [ ] Make it do poems
+- [ ] Get a scout to look at pages and get updates, pass that to a server
+- [ ] Implement Flatfox
+- [ ] Add woko.ch https://woko.ch/en/zimmer-in-zuerich
+- [ ] Make it do poem, make it creative
 - [ ] Make it get approval from the user
 - [ ] Parse the HTML better for the LLM for WohnenETHZ
 - [ ] Add Image to Email As attachment
-- [ ] Add secret examples to github repo
 - [ ] Consolidate everything in secrets into one json file
 
 # Not Urgent
