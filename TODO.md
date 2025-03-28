@@ -1,10 +1,12 @@
 # Doing
 
 # Todo
-- [ ] Make it do poem
+- [ ] Make it do poems
 - [ ] Make it get approval from the user
 - [ ] Parse the HTML better for the LLM for WohnenETHZ
 - [ ] Add Image to Email As attachment
+- [ ] Add secret examples to github repo
+- [ ] Consolidate everything in secrets into one json file
 
 # Not Urgent
 - [ ] Test in WebInteractor that you have reached the give step for each function (using HTML headers?)

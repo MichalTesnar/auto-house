@@ -6,3 +6,4 @@ out/app.log
 __pycache__
 TODO.md
 venv/
+uv.lock
