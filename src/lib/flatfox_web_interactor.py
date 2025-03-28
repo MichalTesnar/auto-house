@@ -30,13 +30,26 @@ class FlatfoxWebInteractor():
         self.driver.get(self.base_url)
         time.sleep(TIME_DELAY_ON_LOAD)
         self.state = "LOADED"
+        consent_button = self.driver.find_element(By.ID, "onetrust-accept-btn-handler")
+        consent_button.click()
+        time.sleep(TIME_DELAY_ON_LOAD)
+        self.state = "LOADED"
+        
     
     def enter(self):
-        # @ TODO: create a check that it has worked based on the HTML
-        username_field = self.driver.find_element(By.NAME, "User")
-        username_field.send_keys(self.profile.login)
+        username_field = self.driver.find_element(By.ID, "id_email")
+        username_field.send_keys(self.profile.flatfox_login)
+        
+        time.sleep(1000)
+        
+        consent_button = self.driver.find_element(By.CLASS_NAME, "onetrust-accept-btn-handler")
+        consent_button.click()
+        time.sleep(TIME_DELAY_ON_LOAD)
+        self.state = "LOADED"
+        
+        
         password_field = self.driver.find_element(By.NAME, "Passwort")
-        password_field.send_keys(self.profile.password)
+        password_field.send_keys(self.profile.flatfox_login)
         password_field.send_keys(Keys.RETURN)
         time.sleep(TIME_DELAY_ON_LOAD)
         self.state = "ENTERED"

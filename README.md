@@ -14,6 +14,11 @@ Please do not overuse this! By default the framework saves the sent emails/messa
 
 Also, the sites are not protected against bots. Please use this moderately so that they do not protect the websites.
 
+# Integrated Websites
+
+- [Zimmer- und Wohnungsvermittlung Universität/ETH Zürich](https://www.wohnen.ethz.ch/)
+- [WGZimmer.ch](https://www.wgzimmer.ch/home.html)
+
 # Setup 
 
 ## Seting up the project

@@ -35,4 +35,6 @@ class PersonalProfile():
             data = json.load(f)
             self.wohnen_ethz_login = data["wohnen_ethz_login"]
             self.wohnen_ethz_password = data["wohnen_ethz_password"]
+            self.flatfox_login = data["flatfox_login"]
+            self.flatfox_password = data["flatfox_password"]
             
