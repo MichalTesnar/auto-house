@@ -1,5 +1,8 @@
 import logging
 from logging.handlers import RotatingFileHandler
+import os
+
+os.makedirs("out", exist_ok=True)
 
 logging.basicConfig(
     level=logging.DEBUG,  # Set the base logging level
