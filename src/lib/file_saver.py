@@ -1,4 +1,4 @@
-from os import listdir
+from os import listdir, makedirs
 from os.path import isfile, join
 import json
 
@@ -6,6 +6,7 @@ import json
 class FileSaver():
     def __init__(self, name: str, profile):
         self.directory = f"secret/{profile.name}/data/{name}"
+        makedirs(self.directory, exist_ok=True)
         self.available_files = [f for f in listdir(self.directory) if isfile(join(self.directory, f))]
         
     def has_been_contacted(self, name: str) -> bool:

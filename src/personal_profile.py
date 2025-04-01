@@ -19,7 +19,7 @@ class PersonalProfile():
         with open(f'secret/{name}/living_preferences.json') as f:
             data = json.load(f)
             self.place_wg_zimmer = data["place_wg_zimmer"]
-            self.max_rent_wg_zimmer = int((data["budget_upper_bound"] + 49) // 50 * 50) # round up by 50s for the selector
+            self.max_rent_wg_zimmer = int((float(data["budget_upper_bound"]) + 49) // 50 * 50) # round up by 50s for the selector
             self.place = data["place"]
             self.max_rent = data["budget_upper_bound"]
             

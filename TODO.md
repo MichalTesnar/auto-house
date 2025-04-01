@@ -8,6 +8,10 @@
 - [ ] Parse the HTML better for the LLM for WohnenETHZ
 - [ ] Add Image to Email As attachment
 - [ ] Use a makefile to refresh example folder by copying yours! (Make a profile generator class)
+- [ ] Consolidate everything in secrets into one json file
+- [ ] Add link to the saved file for faster lookup, also to the email copy you send yourself
+- [ ] Add confirmation mode, so that model
+- [ ] Timestamp emails and messages saved
 
 # Not Urgent
 - [ ] Test in WebInteractor that you have reached the give step for each function (using HTML headers?)

@@ -1,5 +1,6 @@
 import json
 from google import genai
+import re
 
 
 class LLMAgent():
@@ -31,8 +32,10 @@ class LLMAgent():
             contents=message, 
             config=generation_config
         )
-        return response.text
+        response_clean = re.sub(r'[^\u0000-\uFFFF]', '', response.text)
         
+        return response_clean
+    
     def add_to_message(self, message: str):
         self.message += message
         

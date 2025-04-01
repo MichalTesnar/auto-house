@@ -80,7 +80,8 @@ class WohnenETHZWebInteractor():
         valid_emails = set()
         for link in links:
             email = link.get_attribute('href')
-            if "mailto" in email:
+            if "mailto" in email and len(email[len("mailto:"):]) > 0:
+                
                 email = email[len("mailto:"):]
                 if len(email) != 0: # patch bug with traling mailto: tags on the website
                     valid_emails.add(email)

@@ -6,9 +6,9 @@ from src.personal_profile import PersonalProfile
 
 profile = PersonalProfile("michal")
 
-# wg_zimmer = WGZimmer(profile)
-# wg_zimmer.search()
-# wg_zimmer.run()
+wg_zimmer = WGZimmer(profile, debug_mode=False)
+wg_zimmer.search()
+wg_zimmer.run()
 
 # wohnen_ethz = WohnenETHZ(profile)
 # wohnen_ethz.search()

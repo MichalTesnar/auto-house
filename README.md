@@ -47,3 +47,6 @@ Now you can run `make me-have-a-house` or just `python main.py` (but I think the
 # Development
 
 Please open an issue if anything comes up, or make a pull request if you want to add a feature. Refer to [TO-DO List](TODO.md) for planned features.
+
+# Tricks
+- To pass wg zimmer https://github.com/ultrafunkamsterdam/undetected-chromedriver

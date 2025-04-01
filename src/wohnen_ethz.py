@@ -4,14 +4,13 @@ from src.lib.llm_agent import LLMAgent
 from src.lib.file_saver import FileSaver
 from src.lib.logger import logger
 
-DEBUG = 0
-
 class WohnenETHZ():
-    def __init__(self, profile):
+    def __init__(self, profile, debug_mode=False):
         self.web_interactor = WohnenETHZWebInteractor(profile)
         self.email_client = EmailClient(profile)
         self.llm_agent = LLMAgent(profile)
         self.file_saver = FileSaver("wohnen.ethz.ch", profile)
+        self.debug_mode = debug_mode
         
         self.urls = []
         
@@ -38,7 +37,7 @@ class WohnenETHZ():
 
             subject, response = self.llm_agent.game_conversation()
             
-            if DEBUG:
+            if self.debug_mode:
                 print(subject, response)
                 exit()
 
