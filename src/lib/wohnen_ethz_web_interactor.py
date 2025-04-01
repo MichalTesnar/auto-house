@@ -34,9 +34,9 @@ class WohnenETHZWebInteractor():
     def enter(self):
         # @ TODO: create a check that it has worked based on the HTML
         username_field = self.driver.find_element(By.NAME, "User")
-        username_field.send_keys(self.profile.login)
+        username_field.send_keys(self.profile.wohnen_ethz_login)
         password_field = self.driver.find_element(By.NAME, "Passwort")
-        password_field.send_keys(self.profile.password)
+        password_field.send_keys(self.profile.wohnen_ethz_password)
         password_field.send_keys(Keys.RETURN)
         time.sleep(TIME_DELAY_ON_LOAD)
         self.state = "ENTERED"
@@ -80,7 +80,8 @@ class WohnenETHZWebInteractor():
         valid_emails = set()
         for link in links:
             email = link.get_attribute('href')
-            if "mailto" in email:
+            if "mailto" in email and len(email[len("mailto:"):]) > 0:
+                
                 email = email[len("mailto:"):]
                 valid_emails.add(email)
         

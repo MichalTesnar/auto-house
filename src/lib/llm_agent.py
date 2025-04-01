@@ -1,5 +1,6 @@
 import json
 from google import genai
+import re
 
 
 class LLMAgent():
@@ -17,7 +18,9 @@ class LLMAgent():
 
     def respond(self, message: str):
         response = self.client.models.generate_content(model=self.model, contents=message)
-        return response.text
+        response_clean = re.sub(r'[^\u0000-\uFFFF]', '', response.text)
+        
+        return response_clean
     
     def add_to_message(self, message: str):
         self.message += message
