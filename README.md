@@ -14,6 +14,8 @@ Please do not overuse this! By default the framework saves the sent emails/messa
 
 Also, the sites are not protected against bots. Please use this moderately so that they do not protect the websites.
 
+If `auto-house` has helped you consider starring the repository!
+
 # Integrated Websites
 
 - [Zimmer- und Wohnungsvermittlung Universität/ETH Zürich](https://www.wohnen.ethz.ch/)

@@ -9,6 +9,8 @@ class PersonalProfile():
             data = json.load(f)
             self.gmail_login = data["login"]
             self.gmail_password = data["password"]
+            self.gmail_login2 = data["login2"]
+            self.gmail_password2 = data["password2"]
             
         with open(f'secret/{name}/my_description.json') as f:
             data = json.load(f)

@@ -8,8 +8,8 @@ DEBUG = 0
 
 class Flatfox():
     def __init__(self, profile):
-        self.web_interactor = FlatfoxWebInteractor(profile)
         self.email_client = EmailClient(profile)
+        self.web_interactor = FlatfoxWebInteractor(profile, self.email_client) # @TODO: I do not like this construction!
         self.llm_agent = LLMAgent(profile)
         self.file_saver = FileSaver("flatfox.ch", profile)
         

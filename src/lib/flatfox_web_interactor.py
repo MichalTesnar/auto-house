@@ -7,60 +7,52 @@ from bs4 import BeautifulSoup
 from selenium.webdriver.chrome.options import Options
 import re
 
+from src.lib.email_client import EmailClient
+
 TIME_DELAY_ON_LOAD = 0.5
 SILENT = False # use driver.get_screenshot_as_file("capture.png") to debug
 
 class FlatfoxWebInteractor():
     
-    def __init__(self, profile):
+    def __init__(self, profile, email_client):
         self.base_url = "https://flatfox.ch/en/accounts/login/?next=/en/search/"
         self.profile = profile
-
-        if SILENT:    
-            chrome_options = Options()
-            chrome_options.add_argument("--headless")
-            chrome_options.add_argument("--window-size=1920,1080")
-            self.driver = webdriver.Chrome(options=chrome_options)
-        else:
-            self.driver = webdriver.Chrome()
-                
+        self.email_client = email_client
+        self.driver = webdriver.Chrome()
         self.state = "STARTING"
+        
     
     def load(self):
         self.driver.get(self.base_url)
         time.sleep(TIME_DELAY_ON_LOAD)
-        self.state = "LOADED"
         consent_button = self.driver.find_element(By.ID, "onetrust-accept-btn-handler")
         consent_button.click()
         time.sleep(TIME_DELAY_ON_LOAD)
         self.state = "LOADED"
-        
     
     def enter(self):
         username_field = self.driver.find_element(By.ID, "id_email")
         username_field.send_keys(self.profile.flatfox_login)
-        
-        time.sleep(1000)
-        
-        consent_button = self.driver.find_element(By.CLASS_NAME, "onetrust-accept-btn-handler")
+        consent_button = self.driver.find_element(By.CLASS_NAME, "css-1iioj0r")
         consent_button.click()
         time.sleep(TIME_DELAY_ON_LOAD)
-        self.state = "LOADED"
-        
-        
-        password_field = self.driver.find_element(By.NAME, "Passwort")
-        password_field.send_keys(self.profile.flatfox_login)
-        password_field.send_keys(Keys.RETURN)
-        time.sleep(TIME_DELAY_ON_LOAD)
+        username_field = self.driver.find_element(By.ID, "id_password")
+        username_field.send_keys(self.profile.flatfox_password)
+        consent_button.click()
+        time.sleep(5)
+        code = self.email_client.retrieve_6digit_code()
+        otp_field = self.driver.find_element(By.ID, "f1")
+        otp_field.send_keys(code)
+        consent_button.click()
         self.state = "ENTERED"
     
     def search(self):
-        rent_field = self.driver.find_element(By.NAME, "Miete") 
-        rent_field.send_keys(self.profile.max_rent)
-        place_field = self.driver.find_element(By.NAME, "Ort")
-        place_field.send_keys(self.profile.place)
-        place_field.send_keys(Keys.RETURN)
-        time.sleep(TIME_DELAY_ON_LOAD)
+        # place_field = self.driver.find_element(By.CLASS_NAME, "mapboxgl-ctrl-geocoder--icon mapboxgl-ctrl-geocoder--icon-search") 
+        # place_field.send_keys(self.profile.place)
+        # place_field = self.driver.find_element(By.NAME, "Ort")
+        # place_field.send_keys(self.profile.place)
+        # place_field.send_keys(Keys.RETURN)
+        time.sleep(1000)
         self.state = "SEARCHED"
         
     def gather_results(self):
