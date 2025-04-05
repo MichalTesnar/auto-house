@@ -6,7 +6,6 @@
 - [ ] Add woko.ch 
 - [ ] Parse the HTML better for the LLM for WohnenETHZ
 - [ ] Add Image to Email As attachment
-- [ ] Consolidate everything in secrets into one json file
 - [ ] Add link to the saved file for faster lookup
 - [ ] Timestamp emails and messages saved
 

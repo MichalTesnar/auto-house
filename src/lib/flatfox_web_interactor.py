@@ -47,8 +47,8 @@ class FlatfoxWebInteractor():
         self.state = "ENTERED"
     
     def search(self):
-        # place_field = self.driver.find_element(By.CLASS_NAME, "mapboxgl-ctrl-geocoder--icon mapboxgl-ctrl-geocoder--icon-search") 
-        # place_field.send_keys(self.profile.place)
+        place_field = self.driver.find_element(By.CLASS_NAME, "mapboxgl-ctrl-geocoder--input") 
+        place_field.send_keys(self.profile.place)
         # place_field = self.driver.find_element(By.NAME, "Ort")
         # place_field.send_keys(self.profile.place)
         # place_field.send_keys(Keys.RETURN)
