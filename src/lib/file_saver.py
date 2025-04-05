@@ -1,4 +1,4 @@
-from os import listdir, makedirs
+from os import listdir, makedirs, remove
 from os.path import isfile, join
 import json
 
@@ -15,6 +15,12 @@ class FileSaver():
     def save_file(self, file_name: str, file_content: dict):
         with open(f"{self.directory}/{file_name}.json", "w") as json_file:
             json.dump(file_content, json_file)
+            
+    def load_edited_file_and_delete(self, file_name: str):
+        with open(f"{self.directory}/{file_name}.json", "r") as json_file:
+            file_content = json.load(json_file)
+        remove(f"{self.directory}/{file_name}.json")
+        return file_content
     
     def print_response(self, file_name: str) -> dict:
         with open(f"{self.directory}/{file_name}.json", "r") as json_file:

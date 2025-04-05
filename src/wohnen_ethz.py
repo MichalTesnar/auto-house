@@ -5,12 +5,12 @@ from src.lib.file_saver import FileSaver
 from src.lib.logger import logger
 
 class WohnenETHZ():
-    def __init__(self, profile, debug_mode=False):
+    def __init__(self, profile, confirmation_mode=False):
         self.web_interactor = WohnenETHZWebInteractor(profile)
         self.email_client = EmailClient(profile)
         self.llm_agent = LLMAgent(profile)
         self.file_saver = FileSaver("wohnen.ethz.ch", profile)
-        self.debug_mode = debug_mode
+        self.confirmation_mode = confirmation_mode
         
         self.urls = []
         
@@ -37,22 +37,26 @@ class WohnenETHZ():
 
             subject, response = self.llm_agent.game_conversation()
             
-            if self.debug_mode:
-                print(subject, response)
-                exit()
-
-            self.email_client.gmail_send_message(
-                email_adress,
-                subject,
-                response
-            )
-            
             information_json = {
                 "id": advertisement_id,
                 "email_adress": email_adress,
                 "subject": subject,
                 "response": response
                 }
+            
+            if self.confirmation_mode:
+                self.file_saver.save_file("temporary", information_json)
+                input(f"Go and edit temporary file, then come back and press enter!")
+                information_json = self.file_saver.load_edited_file_and_delete("temporary")
+                print("Ok, sending the message!")
+                response = information_json["response"]
+                subject = information_json["subject"]
+
+            self.email_client.gmail_send_message(
+                email_adress,
+                subject,
+                response
+            )
 
             self.file_saver.save_file(advertisement_id, information_json)
             

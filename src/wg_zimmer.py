@@ -5,12 +5,12 @@ from src.lib.file_saver import FileSaver
 from src.lib.logger import logger
 
 class WGZimmer():
-    def __init__(self, profile, debug_mode=False):
+    def __init__(self, profile, confirmation_mode=False):
         self.web_interactor = WGZimmerWebInteractor(profile)
         self.email_client = EmailClient(profile)
         self.llm_agent = LLMAgent(profile)
         self.file_saver = FileSaver("wgzimmer.ch", profile)
-        self.debug_mode = debug_mode
+        self.confirmation_mode = confirmation_mode
         
         self.urls = []
         
@@ -36,15 +36,19 @@ class WGZimmer():
 
             subject, response = self.llm_agent.game_conversation()
             
-            if self.debug_mode:
-                print(subject, response)
-                exit()
-
             information_json = {
                 "id": advertisement_id,
                 "subject": subject,
                 "response": response
                 }
+            
+            if self.confirmation_mode:
+                self.file_saver.save_file("temporary", information_json)
+                input(f"Go and edit temporary file, then come back and press enter!")
+                information_json = self.file_saver.load_edited_file_and_delete("temporary")
+                print("Ok, sending the message!")
+                response = information_json["response"]
+                subject = information_json["subject"]
             
             self.web_interactor.send_information(response)
 

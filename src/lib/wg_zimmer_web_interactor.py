@@ -144,7 +144,10 @@ class WGZimmerWebInteractor():
         text_field = self.driver.find_element(By.ID, "senderText")
         text_field.send_keys(message)
         send_button = self.driver.find_element(By.CLASS_NAME, "submit-inline-mail")
-        ActionChains(self.driver).move_to_element(send_button).click().perform()
+        try:
+            send_button.click()
+        except:
+            ActionChains(self.driver).move_to_element(send_button).click().perform()
         # @BUG SOMETIMES THE AGENT MISSES THE BUTTON, THIS RESULTS IN NOT SENDING THE EMAIL OR ERROR        
         time.sleep(TIME_DELAY_ON_LOAD)
         time.sleep(TIME_DELAY_ON_LOAD)
