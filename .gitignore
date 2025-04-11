@@ -1,7 +1,7 @@
 secret/*
 !secret/example/
 logs/*
-out/app.log
+out/*
 __pycache__
 TODO.md
 venv/

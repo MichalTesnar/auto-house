@@ -14,6 +14,6 @@ profile = PersonalProfile("michal")
 # wohnen_ethz.search()
 # wohnen_ethz.run()
 
-flatfox = Flatfox(profile)
+flatfox = Flatfox(profile, confirmation_mode=True)
 flatfox.search()
 flatfox.run()

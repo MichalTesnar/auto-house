@@ -42,9 +42,10 @@ class EmailClient():
             # fetch the email body (RFC822) for the given ID
             result, data = mail.fetch(email_id, "(RFC822)") 
             raw_email = data[0][1]  # here's the body, which is raw text of the whole email
-            match = re.search(r'\b\d{6}\b', raw_email.decode('utf-8', errors='ignore'))  # search for a 6-digit code
-            if match:
-                code = match.group(0)
+            matches = re.findall(r'\b\d{6}\b', raw_email.decode('utf-8', errors='ignore'))  # find all 6-digit codes
+            if matches:
+                logger.info(f"Found {len(matches)} matching groups: {matches}")
+                code = matches[-1]  # take the first match
                 # Delete the email after retrieving the code
                 mail.store(email_id, '+FLAGS', '\\Deleted')
                 mail.expunge()
