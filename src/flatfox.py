@@ -1,15 +1,20 @@
-from src.lib.wg_zimmer_web_interactor import WGZimmerWebInteractor
+from src.lib.flatfox_web_interactor import FlatfoxWebInteractor
 from src.lib.email_client import EmailClient
 from src.lib.llm_agent import LLMAgent
 from src.lib.file_saver import FileSaver
 from src.lib.logger import logger
 
-class WGZimmer():
+import time
+
+DEBUG = 0
+
+class Flatfox():
     def __init__(self, profile, confirmation_mode=False):
-        self.web_interactor = WGZimmerWebInteractor(profile)
         self.email_client = EmailClient(profile)
+        self.web_interactor = FlatfoxWebInteractor(profile, self.email_client) # @TODO: I do not like this construction!
         self.llm_agent = LLMAgent(profile)
-        self.file_saver = FileSaver("wgzimmer.ch", profile)
+        self.file_saver = FileSaver("flatfox.ch", profile)
+
         self.confirmation_mode = confirmation_mode
         
         self.urls = []
@@ -21,10 +26,11 @@ class WGZimmer():
         self.urls = self.web_interactor.gather_results()
         
     def run(self):
+        
         newly_responded = 0
         
-        while self.web_interactor.has_next_link:
-            advertisement_id, html_content = self.web_interactor.visit_and_gather()
+        for url in self.urls:
+            advertisement_id, html_content = self.web_interactor.visit_and_gather(url)
             
             has_been = self.file_saver.has_been_contacted(advertisement_id)
             
@@ -54,8 +60,10 @@ class WGZimmer():
 
             self.file_saver.save_file(advertisement_id, information_json)
             
+            time.sleep(1)
+            
             newly_responded += 1
-
+            
         logger.info(f"Newly responded to: {newly_responded}")
 
         self.web_interactor.close()

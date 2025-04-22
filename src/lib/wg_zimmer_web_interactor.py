@@ -7,6 +7,10 @@ from bs4 import BeautifulSoup
 from selenium.webdriver.chrome.options import Options
 import re
 
+import undetected_chromedriver as uc
+from selenium.webdriver.common.action_chains import ActionChains
+
+
 TIME_DELAY_ON_LOAD = 2
 SILENT = False
 
@@ -16,13 +20,19 @@ class WGZimmerWebInteractor():
         self.base_url = "https://www.wgzimmer.ch/wgzimmer/search/mate.html"
         self.profile = profile
     
-        if SILENT:    
-            chrome_options = Options()
-            chrome_options.add_argument("--headless")
-            chrome_options.add_argument("--window-size=1920,1080")
-            self.driver = webdriver.Chrome(options=chrome_options)
-        else:
-            self.driver = webdriver.Chrome()
+        # if SILENT:    
+        #     chrome_options = Options()
+        #     chrome_options.add_argument("--headless")
+        #     chrome_options.add_argument("--window-size=1278,1091")
+        #     self.driver = webdriver.Chrome(options=chrome_options)
+        # else:
+        #     self.driver = webdriver.Chrome()
+        
+        options = uc.ChromeOptions()
+        options.add_argument("--disable-blink-features=AutomationControlled")
+        # options.add_argument("--user-data-dir=/path/to/your/chrome/profile")  # Use real Chrome profile
+
+        self.driver = uc.Chrome(options=options, version_main=134)
             
         self.next_link = None
         self.has_next_link = False
@@ -77,16 +87,17 @@ class WGZimmerWebInteractor():
             if "https://www.wgzimmer.ch/wglink/" in url and "facebook" not in url:
                 self.next_link = url
                 self.has_next_link = True
+                break
                 
         self.state = "GOT LINKS"
         return
     
     def visit_and_gather(self):
         match = re.search(r'/de/([a-z0-9\-]+)/', self.next_link)
-        pid = match.group(1)
+        pid = match.group(1) # maybe take the last one
         
         
-        print(self.next_link)
+        # print(self.next_link)
         self.driver.get(self.next_link)
         time.sleep(TIME_DELAY_ON_LOAD)
         
@@ -107,7 +118,7 @@ class WGZimmerWebInteractor():
                 html_content = "1"
                 extracted_content += html_content
         
-        extracted_content
+        # extracted_content
         
         next_link_element = self.driver.find_element(By.CLASS_NAME, "next")
         self.next_link = next_link_element.get_attribute('href')
@@ -132,10 +143,15 @@ class WGZimmerWebInteractor():
         
         text_field = self.driver.find_element(By.ID, "senderText")
         text_field.send_keys(message)
-        
         send_button = self.driver.find_element(By.CLASS_NAME, "submit-inline-mail")
-        send_button.click()
-        
+        try:
+            send_button.click()
+        except:
+            ActionChains(self.driver).move_to_element(send_button).click().perform()
+        # @BUG SOMETIMES THE AGENT MISSES THE BUTTON, THIS RESULTS IN NOT SENDING THE EMAIL OR ERROR        
+        time.sleep(TIME_DELAY_ON_LOAD)
+        time.sleep(TIME_DELAY_ON_LOAD)
+        time.sleep(TIME_DELAY_ON_LOAD)
     def close(self):
         self.driver.quit()
     

@@ -14,6 +14,13 @@ Please do not overuse this! By default the framework saves the sent emails/messa
 
 Also, the sites are not protected against bots. Please use this moderately so that they do not protect the websites.
 
+If `auto-house` has helped you consider starring the repository!
+
+# Integrated Websites
+
+- [Zimmer- und Wohnungsvermittlung Universität/ETH Zürich](https://www.wohnen.ethz.ch/)
+- [WGZimmer.ch](https://www.wgzimmer.ch/home.html)
+
 # Setup 
 
 ## Seting up the project
@@ -42,3 +49,6 @@ Now you can run `make me-have-a-house` or just `python main.py` (but I think the
 # Development
 
 Please open an issue if anything comes up, or make a pull request if you want to add a feature. Refer to [TO-DO List](TODO.md) for planned features.
+
+# Tricks
+- To pass wg zimmer https://github.com/ultrafunkamsterdam/undetected-chromedriver
