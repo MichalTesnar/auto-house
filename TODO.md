@@ -10,4 +10,3 @@
 
 # Not Urgent
 - [ ] Test in WebInteractor that you have reached the give step for each function (using HTML headers?)
-- [ ] Fix tests so that they can be run from main directory

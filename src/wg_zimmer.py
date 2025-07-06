@@ -22,6 +22,7 @@ class WGZimmer():
         
     def run(self):
         newly_responded = 0
+        newly_rejected = 0
         
         while self.web_interactor.has_next_link:
             advertisement_id, html_content = self.web_interactor.visit_and_gather()
@@ -42,20 +43,28 @@ class WGZimmer():
                 "response": response
                 }
             
+            decision = ""
+            
             if self.confirmation_mode:
                 self.file_saver.save_file("temporary", information_json)
-                input(f"Go and edit temporary file, then come back and press enter!")
+                decision = input("Go and edit temporary file, then come back and enter \"yes\" or \"no\" to send or reject (and save the decision))")
                 information_json = self.file_saver.load_edited_file_and_delete("temporary")
-                print("Ok, sending the message!")
                 response = information_json["response"]
                 subject = information_json["subject"]
             
-            self.web_interactor.send_information(response)
+            if "yes" in decision:  
+                print("Ok, sending the message!")
+                self.web_interactor.send_information(response)
+                self.file_saver.save_file(advertisement_id, information_json)
+                newly_responded += 1
+                
+            if "no" in decision:
+                print("Saving the message only!")
+                # self.web_interactor.send_information(response)
+                self.file_saver.save_file(advertisement_id, information_json)
+                newly_rejected += 1
+                
 
-            self.file_saver.save_file(advertisement_id, information_json)
-            
-            newly_responded += 1
-
-        logger.info(f"Newly responded to: {newly_responded}")
+        logger.info(f"Newly responded to: {newly_responded}, newly rejected: {newly_rejected}")
 
         self.web_interactor.close()

@@ -16,6 +16,9 @@ class FileSaver():
         with open(f"{self.directory}/{file_name}.json", "w") as json_file:
             json.dump(file_content, json_file)
             
+    def delete_file(self, file_name: str):
+        remove(f"{self.directory}/{file_name}.json")
+            
     def load_edited_file_and_delete(self, file_name: str):
         with open(f"{self.directory}/{file_name}.json", "r") as json_file:
             file_content = json.load(json_file)
