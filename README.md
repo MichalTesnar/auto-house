@@ -20,6 +20,7 @@ If `auto-house` has helped you consider starring the repository!
 
 - [Zimmer- und Wohnungsvermittlung Universität/ETH Zürich](https://www.wohnen.ethz.ch/)
 - [WGZimmer.ch](https://www.wgzimmer.ch/home.html)
+- [Flatfox.ch](https://flatfox.ch/c/en/)
 
 # Setup 
 

@@ -69,7 +69,9 @@ class WGZimmerWebInteractor():
                 option.click()
                 break
 
-        # time.sleep(TIME_DELAY_ON_LOAD)
+        # Select "Nur Unbefristete"
+        permanent_radio = self.driver.find_element(By.ID, "permanent")
+        permanent_radio.click()
         self.state = "FORM_FILLED"
     
     def search(self):
@@ -149,8 +151,6 @@ class WGZimmerWebInteractor():
         except:
             ActionChains(self.driver).move_to_element(send_button).click().perform()
         # @BUG SOMETIMES THE AGENT MISSES THE BUTTON, THIS RESULTS IN NOT SENDING THE EMAIL OR ERROR        
-        time.sleep(TIME_DELAY_ON_LOAD)
-        time.sleep(TIME_DELAY_ON_LOAD)
         time.sleep(TIME_DELAY_ON_LOAD)
     def close(self):
         self.driver.quit()
